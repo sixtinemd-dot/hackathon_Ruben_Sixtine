@@ -1,0 +1,9 @@
+The AI-powered document search system ingests uploaded files, extracts their text, and splits the text into overlapping chunks.
+
+Each chunk is converted into a searchable representation. When sentence-transformers is installed, the system uses all-MiniLM-L6-v2 embeddings for semantic search. When it is not installed, the system falls back to a TF-IDF representation that works offline.
+
+The vector index stores chunk metadata including the document name and chunk index. Query results show the highest-scoring chunks and pass their text into a summarizer.
+
+For CPU-friendly operation, the system uses small chunks, small batch sizes, and a flat FAISS index when FAISS is available. The fallback summarizer selects the most relevant sentences from retrieved sections.
+
+The evaluation interface measures precision at k and recall at k for search. It also computes lightweight BLEU and ROUGE-L scores when a reference summary is provided.
